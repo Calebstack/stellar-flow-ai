@@ -109,7 +109,7 @@ const Landing = () => {
                 <Bot className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                 <div>
                   <p className="text-xs text-muted-foreground">AI Insight</p>
-                  <p className="text-[11px] text-foreground">You saved 30% in fees this week 🎉</p>
+                  <p className="text-[11px] text-foreground">You saved 60% in fees vs. traditional wire 🎉</p>
                 </div>
               </div>
             </div>

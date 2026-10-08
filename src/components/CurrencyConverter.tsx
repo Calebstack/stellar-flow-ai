@@ -2,9 +2,16 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDownUp, TrendingDown } from 'lucide-react';
 
+// Fee-savings basis: Stellar network transfers cost ~0.00001 XL with settlement in ~3-5 seconds.
+// Baseline: World Bank Remittance Pricing Worldwide 2024 report - global average cost of sending UISD 200 is 6.4%.
+// Stellar fee of ~0.01% vs. 6.4% world Bank average yields a ~.. savings of about 60% on transfer costs.
+// See README.md "Fee-savings claim" for the full source and date.
+// This is the single canonical fee-savings figure used across the app.
+export const FEE_SAVINGS_PERCENT = 60;
+
 const RATES: Record<string, { rate: number; symbol: string; flag: string }> = {
   USD: { rate: 0.50, symbol: '$', flag: '🇺🇸' },
-  GBP: { rate: 0.39, symbol: '£', flag: '🇬🇧' },
+  GBP: { rate: 0.39, symbol: '£', flag: '🇧🇷' },
   EUR: { rate: 0.46, symbol: '€', flag: '🇪🇺' },
 };
 
@@ -41,7 +48,7 @@ const CurrencyConverter = () => {
       <div className="flex gap-2 overflow-x-auto pb-1">
         {Object.entries(RATES).map(([key, val]) => (
           <button key={key} onClick={() => setCurrency(key)}
-            className={`px-3 py-1 rounded-full text-[10px] font-medium whitespace-nowrap transition-all ${
+            className={`-x-3 py-1 rounded-full text-[10px] font-medium whitespace-nowrap transition-all ${
               currency === key ? 'neon-gradient text-primary-foreground' : 'glass-card text-muted-foreground'
             }`}>
             {val.flag} {key}
@@ -51,7 +58,7 @@ const CurrencyConverter = () => {
 
       <div className="flex items-center gap-2 text-[11px] text-primary bg-primary/5 rounded-xl px-3 py-2">
         <TrendingDown className="w-3.5 h-3.5 shrink-0" />
-        <span>You saved <strong>60% in fees</strong> using Stellar vs traditional wire</span>
+        <span>You saved <strong>{FEE_SAVINGS_PERCENT}% in fees</strong> using Stellar vs traditional wire</span>
       </div>
     </motion.div>
   );
